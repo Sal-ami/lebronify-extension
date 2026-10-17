@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "lebronify",
+  "version": "0.1.0",
+  "description": "Turns every page into LeBron. Runs on your machine only.",
+  "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "lebronify@local",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_title": "lebronify",
+    "default_icon": "lebron.png"
+  },
+  "icons": {
+    "128": "lebron.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["engine.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lebron.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
